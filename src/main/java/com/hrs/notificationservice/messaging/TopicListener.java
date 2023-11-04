@@ -7,6 +7,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import com.hrs.notificationservice.models.CustomerDto;
+import com.hrs.notificationservice.models.NotificationType;
 import com.hrs.notificationservice.services.NotificationService;
 
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,7 @@ public class TopicListener {
 		log.info("Customer : {}", payload.value());
 
 		CustomerDto customer = payload.value();
-		notificationService.sendWelcomeEmail(customer);
+		notificationService.sendEmail(customer, null, NotificationType.REGISTRATION);
 
 	}
 
