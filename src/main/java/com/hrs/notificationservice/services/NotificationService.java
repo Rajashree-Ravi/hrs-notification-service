@@ -7,11 +7,12 @@ import javax.validation.Valid;
 import com.hrs.notificationservice.models.CustomerDto;
 import com.hrs.notificationservice.models.NotificationDto;
 import com.hrs.notificationservice.models.NotificationType;
+import com.hrs.notificationservice.models.PaymentDto;
 import com.hrs.notificationservice.models.ReservationDto;
 
 public interface NotificationService {
 
-	void sendEmail(@Valid CustomerDto customer, @Valid ReservationDto reservation, @Valid NotificationType type);
+	void sendEmail(@Valid CustomerDto customer, @Valid ReservationDto reservation, @Valid PaymentDto paymentDto, @Valid NotificationType type);
 
 	NotificationDto getNotificationById(@Valid long id);
 

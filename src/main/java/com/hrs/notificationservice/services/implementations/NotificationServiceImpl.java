@@ -21,6 +21,7 @@ import com.hrs.notificationservice.models.CustomerDto;
 import com.hrs.notificationservice.models.NotificationDto;
 import com.hrs.notificationservice.models.NotificationStatus;
 import com.hrs.notificationservice.models.NotificationType;
+import com.hrs.notificationservice.models.PaymentDto;
 import com.hrs.notificationservice.models.ReservationDto;
 import com.hrs.notificationservice.repositories.NotificationRepository;
 import com.hrs.notificationservice.services.NotificationService;
@@ -44,7 +45,7 @@ public class NotificationServiceImpl implements NotificationService {
 	 */
 	@Override
 	public void sendEmail(@Valid CustomerDto customer, @Valid ReservationDto reservationDto,
-			@Valid NotificationType type) {
+			@Valid PaymentDto paymentDto, @Valid NotificationType type) {
 
 		NotificationDto notificationDto = new NotificationDto();
 		notificationDto.setCustomerId(customer.getId());
@@ -81,7 +82,9 @@ public class NotificationServiceImpl implements NotificationService {
 		}
 		case PAYMENT_CONFIRMATION: {
 			subject = "Payment confirmation";
-			content = "<p>Hello " + customer.getName() + ",</p><p>Payment has been received successfully.</p>";
+			content = "<p>Hello " + customer.getName() + ",</p><p>Payment for reservation: "
+					+ paymentDto.getReservationId() + " has been received successfully through "
+					+ paymentDto.getProvider().toString() + ".</p>";
 			notificationDto.setReservationId(reservationDto.getId());
 			break;
 		}
